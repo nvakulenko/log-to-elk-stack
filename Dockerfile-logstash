@@ -1,0 +1,5 @@
+FROM docker.elastic.co/logstash/logstash:6.6.1
+RUN rm -f /usr/share/logstash/pipeline/logstash.conf
+
+# Put our custom pipeline for log files into the image
+ADD logstash.conf /usr/share/logstash/config/

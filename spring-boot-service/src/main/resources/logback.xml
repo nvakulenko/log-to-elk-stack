@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>0.0.0.0:4560</destination>
+
+        <!-- encoder is required -->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service":"log-to-elk-stack"}</customFields>
+        </encoder>
+
+        <!-- To output JSON for AccessEvents over TCP -->
+        <!-- TODO: try with 2 different encoders, test logging REST calls  -->
+        <!-- encoder class="net.logstash.logback.encoder.LogstashAccessEncoder" / -->
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="STASH" />
+    </root>
+
+    <!-- guarantee that logged messages have had a chance to be processed by the TCP appender -->
+
+    <!--shutdownHook class="ch.qos.logback.core.hook.DefaultShutdownHook"/-->
+
+</configuration>
