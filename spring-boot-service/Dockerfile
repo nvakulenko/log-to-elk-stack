@@ -6,4 +6,4 @@ RUN mvn -f /usr/src/app/pom.xml clean package
 FROM openjdk:8
 COPY --from=build /usr/src/app/target/spring-boot-service-0.0.1-SNAPSHOT.jar /usr/app/spring-boot-service-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/app/spring-boot-service-0.1.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/usr/app/spring-boot-service-0.0.1-SNAPSHOT.jar"]
