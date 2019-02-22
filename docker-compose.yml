@@ -5,10 +5,6 @@ services:
   elasticsearch:
     build:
       context: elasticsearch/
-      args:
-        ELK_VERSION: 6.6.1
-    volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -20,11 +16,6 @@ services:
   logstash:
     build:
       context: logstash/
-      args:
-        ELK_VERSION: 6.6.1
-    volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "4560:4560"
       - "9600:9600"
@@ -38,10 +29,6 @@ services:
   kibana:
     build:
       context: kibana/
-      args:
-        ELK_VERSION: 6.6.1
-    volumes:
-      - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
